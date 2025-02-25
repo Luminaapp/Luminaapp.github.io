@@ -4,6 +4,11 @@ function Home() {
   const screenshotsRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isUserInteracting, setIsUserInteracting] = useState(false);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
   const screenshots = [
     'your-mockup.png',
     'your-mockup.png',
@@ -57,6 +62,70 @@ function Home() {
     return () => clearInterval(interval);
   }, [isUserInteracting]);
 
+  const handleTouchStart = (e) => {
+    setTouchStart(e.touches[0].clientX);
+    setTouchEnd(e.touches[0].clientX);
+    setIsUserInteracting(true);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.touches[0].clientX);
+    const diff = touchStart - e.touches[0].clientX;
+    setDragOffset(diff);
+  };
+
+  const handleTouchEnd = () => {
+    const diff = touchStart - touchEnd;
+    const minSwipeDistance = 50; // Minimum distance for swipe
+
+    if (Math.abs(diff) > minSwipeDistance) {
+      if (diff > 0) {
+        // Swiped left
+        setCurrentIndex(prev => prev === screenshots.length - 1 ? 0 : prev + 1);
+      } else {
+        // Swiped right
+        setCurrentIndex(prev => prev === 0 ? screenshots.length - 1 : prev - 1);
+      }
+    }
+    setDragOffset(0);
+    setTimeout(() => setIsUserInteracting(false), 1000);
+  };
+
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setDragStart(e.clientX);
+    setIsUserInteracting(true);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    const diff = dragStart - e.clientX;
+    setDragOffset(diff);
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragging) return;
+    const diff = dragOffset;
+    const minSwipeDistance = 50;
+
+    if (Math.abs(diff) > minSwipeDistance) {
+      if (diff > 0) {
+        setCurrentIndex(prev => prev === screenshots.length - 1 ? 0 : prev + 1);
+      } else {
+        setCurrentIndex(prev => prev === 0 ? screenshots.length - 1 : prev - 1);
+      }
+    }
+    setIsDragging(false);
+    setDragOffset(0);
+    setTimeout(() => setIsUserInteracting(false), 1000);
+  };
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      handleMouseUp();
+    }
+  };
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -73,7 +142,7 @@ function Home() {
               </p>
               <a
                 href="#download"
-                className="inline-flex items-center px-6 sm:px-8 py-2.5 sm:py-3 bg-primary-300 text-white font-rubik-medium rounded-lg hover:opacity-90 transition-opacity gap-2"
+                className="inline-flex items-center px-6 sm:px-8 py-2.5 sm:py-3 bg-primary-300 text-white font-rubik-medium rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(99,102,241,0.3)] gap-2"
               >
                 <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
@@ -160,15 +229,21 @@ function Home() {
             {/* Screenshots carousel */}
             <div 
               className="relative px-4 sm:px-0"
-              onMouseEnter={() => setIsUserInteracting(true)}
-              onMouseLeave={() => setIsUserInteracting(false)}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseLeave}
             >
               {/* Phones Container */}
               <div className="flex justify-center items-center overflow-hidden">
                 <div 
                   className="flex gap-4 sm:gap-8 transition-transform duration-500 ease-in-out"
                   style={{
-                    transform: `translateX(calc(${-currentIndex * (window.innerWidth < 640 ? 256 : 352)}px + 50% - ${window.innerWidth < 640 ? 120 : 160}px))`
+                    transform: `translateX(calc(${-currentIndex * (window.innerWidth < 640 ? 256 : 352)}px + 50% - ${window.innerWidth < 640 ? 120 : 160}px - ${dragOffset}px))`,
+                    cursor: isDragging ? 'grabbing' : 'grab'
                   }}
                 >
                   {screenshots.map((screenshot, index) => {
