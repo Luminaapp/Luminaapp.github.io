@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { MdDescription, MdCalendarToday, MdPsychology } from "react-icons/md";
 
 function Home() {
   const screenshotsRef = useRef(null);
@@ -180,9 +181,7 @@ function Home() {
               <div className="bg-black-500/30 rounded-2xl p-6 backdrop-blur-sm hover:bg-black-500/40 transition-colors">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="p-3 bg-primary-100 rounded-xl">
-                    <svg className="w-6 h-6 text-primary-300" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
-                    </svg>
+                    <MdDescription className="w-6 h-6 text-primary-300" />
                   </div>
                   <h3 className="text-xl font-rubik-bold text-white">Smart Syllabus Import</h3>
                 </div>
@@ -193,9 +192,7 @@ function Home() {
               <div className="bg-black-500/30 rounded-2xl p-6 backdrop-blur-sm hover:bg-black-500/40 transition-colors">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="p-3 bg-primary-100 rounded-xl">
-                    <svg className="w-6 h-6 text-primary-300" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M19 4h-1V3c0-.55-.45-1-1-1s-1 .45-1 1v1H8V3c0-.55-.45-1-1-1s-1 .45-1 1v1H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/>
-                    </svg>
+                    <MdCalendarToday className="w-6 h-6 text-primary-300" />
                   </div>
                   <h3 className="text-xl font-rubik-bold text-white">Seamless Organization</h3>
                 </div>
@@ -206,9 +203,7 @@ function Home() {
               <div className="bg-black-500/30 rounded-2xl p-6 backdrop-blur-sm hover:bg-black-500/40 transition-colors">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="p-3 bg-primary-100 rounded-xl">
-                    <svg className="w-6 h-6 text-primary-300" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 2v12H4V6h16zm-3 7c0-.55-.45-1-1-1h-2.5v-2.5c0-.55-.45-1-1-1s-1 .45-1 1V12H9c-.55 0-1 .45-1 1s.45 1 1 1h2.5v2.5c0 .55.45 1 1 1s1-.45 1-1V14H16c.55 0 1-.45 1-1zm-6-7h2v2h-2V6zm-3 0h2v2H8V6zm-3 0h2v2H5V6z"/>
-                    </svg>
+                    <MdPsychology className="w-6 h-6 text-primary-300" />
                   </div>
                   <h3 className="text-xl font-rubik-bold text-white">Smart Study Assistant</h3>
                 </div>
