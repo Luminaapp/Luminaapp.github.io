@@ -104,7 +104,49 @@ function Home() {
           <h2 className="text-4xl font-rubik-bold text-white text-center mb-12">
             Features
           </h2>
-          {/* Add your features content here */}
+          <div className="bg-black-500/50 backdrop-blur-sm rounded-3xl p-8 sm:p-12">
+            {/* Features grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Syllabus Import */}
+              <div className="bg-black-500/30 rounded-2xl p-6 backdrop-blur-sm hover:bg-black-500/40 transition-colors">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="p-3 bg-primary-100 rounded-xl">
+                    <svg className="w-6 h-6 text-primary-300" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-rubik-bold text-white">Smart Syllabus Import</h3>
+                </div>
+                <p className="text-black-100">Skip the manual setup. Simply upload your syllabus and watch as your class schedule, assignments, and important dates are automatically organized for you.</p>
+              </div>
+
+              {/* Schedule Management */}
+              <div className="bg-black-500/30 rounded-2xl p-6 backdrop-blur-sm hover:bg-black-500/40 transition-colors">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="p-3 bg-primary-100 rounded-xl">
+                    <svg className="w-6 h-6 text-primary-300" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19 4h-1V3c0-.55-.45-1-1-1s-1 .45-1 1v1H8V3c0-.55-.45-1-1-1s-1 .45-1 1v1H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/>
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-rubik-bold text-white">Seamless Organization</h3>
+                </div>
+                <p className="text-black-100">Keep track of classes, assignments, and deadlines with smart reminders. Sync everything to your favorite calendar app with one click.</p>
+              </div>
+
+              {/* AI Study Tools */}
+              <div className="bg-black-500/30 rounded-2xl p-6 backdrop-blur-sm hover:bg-black-500/40 transition-colors">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="p-3 bg-primary-100 rounded-xl">
+                    <svg className="w-6 h-6 text-primary-300" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M21 11.5v-1c0-.8-.7-1.5-1.5-1.5H16v6h1.5v-2h1.1l.9 2H21l-.9-2.1c.5-.3.9-.8.9-1.4zm-1.5 0h-2v-1h2v1zm-13-.5h-2V9H3v6h1.5v-2.5h2V15H8V9H6.5v2zM13 9H9.5v6H13c.8 0 1.5-.7 1.5-1.5v-3c0-.8-.7-1.5-1.5-1.5zm0 4.5h-2v-3h2v3z"/>
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-rubik-bold text-white">Smart Study Assistant</h3>
+                </div>
+                <p className="text-black-100">Transform any course material into study guides, practice questions, or get instant help with assignments. Your personal academic assistant is always ready to help.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -114,84 +156,85 @@ function Home() {
           <h2 className="text-4xl font-rubik-bold text-white text-center mb-12">
             Screenshots
           </h2>
-          
-          {/* Screenshots carousel */}
-          <div 
-            className="relative"
-            onMouseEnter={() => setIsUserInteracting(true)}
-            onMouseLeave={() => setIsUserInteracting(false)}
-          >
-            {/* Phones Container */}
-            <div className="flex justify-center items-center overflow-hidden">
-              <div 
-                className="flex gap-8 transition-transform duration-500 ease-in-out"
-                style={{
-                  transform: `translateX(calc(${-currentIndex * (320 + 32)}px + 50% - 160px))`, // 320px is phone width, 32px is gap, 160px is half phone width
-                }}
-              >
-                {screenshots.map((screenshot, index) => {
-                  const position = index - currentIndex;
-                  return (
-                    <div 
-                      key={index}
-                      className={`
-                        w-[280px] h-[567px] sm:w-[320px] sm:h-[650px]
-                        transition-all duration-500 ease-in-out
-                        ${Math.abs(position) <= 2 ? 'opacity-100' : 'opacity-0'}
-                        transform
-                        ${position === 0 ? 'scale-100 z-20' : 'scale-75 z-10'}
-                      `}
-                    >
-                      <div className="w-full h-full rounded-[2rem] sm:rounded-[3rem] bg-black-500/30 overflow-hidden">
-                        <img
-                          src={import.meta.env.BASE_URL + screenshot}
-                          alt={`Screenshot ${index + 1}`}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Navigation buttons */}
-            <button 
-              onClick={() => setCurrentIndex(prev => 
-                prev === 0 ? screenshots.length - 1 : prev - 1
-              )}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-white p-4 opacity-75 hover:opacity-100 bg-black-500/50 rounded-full"
-            >
-              ←
-            </button>
-            <button 
-              onClick={() => setCurrentIndex(prev => 
-                prev === screenshots.length - 1 ? 0 : prev + 1
-              )}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white p-4 opacity-75 hover:opacity-100 bg-black-500/50 rounded-full"
-            >
-              →
-            </button>
-
-            {/* Pagination dots */}
+          <div className="bg-black-500/50 backdrop-blur-sm rounded-3xl p-8 sm:p-12">
+            {/* Screenshots carousel */}
             <div 
-              className="flex justify-center gap-3 mt-8 flex-wrap"
+              className="relative"
               onMouseEnter={() => setIsUserInteracting(true)}
               onMouseLeave={() => setIsUserInteracting(false)}
             >
-              {screenshots.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    setCurrentIndex(index);
-                    setIsUserInteracting(true);
+              {/* Phones Container */}
+              <div className="flex justify-center items-center overflow-hidden">
+                <div 
+                  className="flex gap-8 transition-transform duration-500 ease-in-out"
+                  style={{
+                    transform: `translateX(calc(${-currentIndex * (320 + 32)}px + 50% - 160px))`, // 320px is phone width, 32px is gap, 160px is half phone width
                   }}
-                  className={`w-3 h-3 rounded-full transition-colors ${
-                    currentIndex === index ? 'bg-primary-300' : 'bg-black-100'
-                  }`}
-                  aria-label={`Go to screenshot ${index + 1}`}
-                />
-              ))}
+                >
+                  {screenshots.map((screenshot, index) => {
+                    const position = index - currentIndex;
+                    return (
+                      <div 
+                        key={index}
+                        className={`
+                          w-[280px] h-[567px] sm:w-[320px] sm:h-[650px]
+                          transition-all duration-500 ease-in-out
+                          ${Math.abs(position) <= 2 ? 'opacity-100' : 'opacity-0'}
+                          transform
+                          ${position === 0 ? 'scale-100 z-20' : 'scale-75 z-10'}
+                        `}
+                      >
+                        <div className="w-full h-full rounded-[2rem] sm:rounded-[3rem] bg-black-500/30 overflow-hidden">
+                          <img
+                            src={import.meta.env.BASE_URL + screenshot}
+                            alt={`Screenshot ${index + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Navigation buttons */}
+              <button 
+                onClick={() => setCurrentIndex(prev => 
+                  prev === 0 ? screenshots.length - 1 : prev - 1
+                )}
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-white p-4 opacity-75 hover:opacity-100 bg-black-500/50 rounded-full"
+              >
+                ←
+              </button>
+              <button 
+                onClick={() => setCurrentIndex(prev => 
+                  prev === screenshots.length - 1 ? 0 : prev + 1
+                )}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-white p-4 opacity-75 hover:opacity-100 bg-black-500/50 rounded-full"
+              >
+                →
+              </button>
+
+              {/* Pagination dots */}
+              <div 
+                className="flex justify-center gap-3 mt-8 flex-wrap"
+                onMouseEnter={() => setIsUserInteracting(true)}
+                onMouseLeave={() => setIsUserInteracting(false)}
+              >
+                {screenshots.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setCurrentIndex(index);
+                      setIsUserInteracting(true);
+                    }}
+                    className={`w-3 h-3 rounded-full transition-colors ${
+                      currentIndex === index ? 'bg-primary-300' : 'bg-black-100'
+                    }`}
+                    aria-label={`Go to screenshot ${index + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -200,19 +243,21 @@ function Home() {
       {/* Contact Section */}
       <div id="contact" className="bg-[#171922] scroll-mt-16 opacity-0 animate-fade-in-up">
         <div className="max-w-[1400px] mx-auto px-8 sm:px-12 lg:px-16 py-24">
-          <h2 className="text-4xl font-rubik-bold text-white text-center mb-8">
+          <h2 className="text-4xl font-rubik-bold text-white text-center mb-12">
             Contact
           </h2>
-          <div className="text-center">
-            <p className="text-xl text-black-100 font-rubik-medium mb-4">
-              Contact the Developer
-            </p>
-            <a 
-              href="mailto:lumminapp.official@gmail.com"
-              className="text-primary-300 font-rubik-medium hover:underline"
-            >
-              lumminapp.official@gmail.com
-            </a>
+          <div className="bg-black-500/50 backdrop-blur-sm rounded-3xl p-8 sm:p-12">
+            <div className="text-center">
+              <p className="text-xl text-black-100 font-rubik-medium mb-4">
+                Contact the Developer
+              </p>
+              <a 
+                href="mailto:lumminapp.official@gmail.com"
+                className="text-primary-300 font-rubik-medium hover:underline"
+              >
+                lumminapp.official@gmail.com
+              </a>
+            </div>
           </div>
         </div>
       </div>
