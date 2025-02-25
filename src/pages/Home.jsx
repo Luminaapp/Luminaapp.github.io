@@ -159,16 +159,16 @@ function Home() {
           <div className="bg-black-500/50 backdrop-blur-sm rounded-3xl p-8 sm:p-12">
             {/* Screenshots carousel */}
             <div 
-              className="relative"
+              className="relative px-4 sm:px-0"
               onMouseEnter={() => setIsUserInteracting(true)}
               onMouseLeave={() => setIsUserInteracting(false)}
             >
               {/* Phones Container */}
               <div className="flex justify-center items-center overflow-hidden">
                 <div 
-                  className="flex gap-8 transition-transform duration-500 ease-in-out"
+                  className="flex gap-4 sm:gap-8 transition-transform duration-500 ease-in-out"
                   style={{
-                    transform: `translateX(calc(${-currentIndex * (320 + 32)}px + 50% - 160px))`, // 320px is phone width, 32px is gap, 160px is half phone width
+                    transform: `translateX(calc(${-currentIndex * (window.innerWidth < 640 ? 256 : 352)}px + 50% - ${window.innerWidth < 640 ? 120 : 160}px))`
                   }}
                 >
                   {screenshots.map((screenshot, index) => {
@@ -177,14 +177,14 @@ function Home() {
                       <div 
                         key={index}
                         className={`
-                          w-[280px] h-[567px] sm:w-[320px] sm:h-[650px]
+                          w-[240px] h-[487px] sm:w-[320px] sm:h-[650px]
                           transition-all duration-500 ease-in-out
                           ${Math.abs(position) <= 2 ? 'opacity-100' : 'opacity-0'}
                           transform
                           ${position === 0 ? 'scale-100 z-20' : 'scale-75 z-10'}
                         `}
                       >
-                        <div className="w-full h-full rounded-[2rem] sm:rounded-[3rem] bg-black-500/30 overflow-hidden">
+                        <div className="w-full h-full rounded-2xl sm:rounded-[3rem] bg-black-500/30 overflow-hidden">
                           <img
                             src={import.meta.env.BASE_URL + screenshot}
                             alt={`Screenshot ${index + 1}`}
@@ -197,27 +197,29 @@ function Home() {
                 </div>
               </div>
 
-              {/* Navigation buttons */}
-              <button 
-                onClick={() => setCurrentIndex(prev => 
-                  prev === 0 ? screenshots.length - 1 : prev - 1
-                )}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-white p-4 opacity-75 hover:opacity-100 bg-black-500/50 rounded-full"
-              >
-                ←
-              </button>
-              <button 
-                onClick={() => setCurrentIndex(prev => 
-                  prev === screenshots.length - 1 ? 0 : prev + 1
-                )}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-white p-4 opacity-75 hover:opacity-100 bg-black-500/50 rounded-full"
-              >
-                →
-              </button>
+              {/* Navigation buttons - hide on very small screens */}
+              <div className="hidden sm:block">
+                <button 
+                  onClick={() => setCurrentIndex(prev => 
+                    prev === 0 ? screenshots.length - 1 : prev - 1
+                  )}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-white p-4 opacity-75 hover:opacity-100 bg-black-500/50 rounded-full"
+                >
+                  ←
+                </button>
+                <button 
+                  onClick={() => setCurrentIndex(prev => 
+                    prev === screenshots.length - 1 ? 0 : prev + 1
+                  )}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white p-4 opacity-75 hover:opacity-100 bg-black-500/50 rounded-full"
+                >
+                  →
+                </button>
+              </div>
 
               {/* Pagination dots */}
               <div 
-                className="flex justify-center gap-3 mt-8 flex-wrap"
+                className="flex justify-center gap-2 sm:gap-3 mt-6 sm:mt-8 flex-wrap"
                 onMouseEnter={() => setIsUserInteracting(true)}
                 onMouseLeave={() => setIsUserInteracting(false)}
               >
@@ -228,7 +230,7 @@ function Home() {
                       setCurrentIndex(index);
                       setIsUserInteracting(true);
                     }}
-                    className={`w-3 h-3 rounded-full transition-colors ${
+                    className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-colors ${
                       currentIndex === index ? 'bg-primary-300' : 'bg-black-100'
                     }`}
                     aria-label={`Go to screenshot ${index + 1}`}
