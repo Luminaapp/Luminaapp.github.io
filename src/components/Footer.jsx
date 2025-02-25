@@ -15,14 +15,16 @@ function Footer() {
         <div className="flex flex-col items-center space-y-6">
           <div className="flex space-x-6">
             <a 
-              href={import.meta.env.BASE_URL + '#/terms'}
+              href="/terms"
               className="text-black-100 hover:text-white transition-colors font-rubik"
+              onClick={handleLegalClick('/terms')}
             >
               Terms of Service
             </a>
             <a 
-              href={import.meta.env.BASE_URL + '#/privacy'}
+              href="/privacy"
               className="text-black-100 hover:text-white transition-colors font-rubik"
+              onClick={handleLegalClick('/privacy')}
             >
               Privacy Policy
             </a>
