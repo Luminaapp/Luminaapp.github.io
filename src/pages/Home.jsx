@@ -157,7 +157,7 @@ function Home() {
               <div className="relative w-[280px] h-[567px] sm:w-[320px] sm:h-[650px] animate-float">
                 <div className="w-full h-full rounded-[2rem] sm:rounded-[3rem] bg-black-500/30 overflow-hidden">
                   <img
-                    src={import.meta.env.BASE_URL + 'your-mockup.png'}
+                    src={`${import.meta.env.BASE_URL}your-mockup.png`}
                     alt="Lumina App Interface"
                     className="w-full h-full object-cover"
                   />
@@ -256,7 +256,7 @@ function Home() {
                       >
                         <div className="w-full h-full rounded-2xl sm:rounded-[3rem] bg-black-500/30 overflow-hidden">
                           <img
-                            src={import.meta.env.BASE_URL + screenshot}
+                            src={`${import.meta.env.BASE_URL}your-mockup.png`}
                             alt={`Screenshot ${index + 1}`}
                             className="w-full h-full object-cover"
                           />
