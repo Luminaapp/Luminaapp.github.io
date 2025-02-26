@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://luminaapp.github.io/",
+  "homepage": "https://luminaapp.github.io/luminaapp.github.io/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
