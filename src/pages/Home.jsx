@@ -327,7 +327,7 @@ function Home() {
                 href="mailto:lumminapp.official@gmail.com"
                 className="text-primary-300 font-rubik-medium hover:underline inline-block mb-8"
               >
-                lumminapp.official@gmail.com
+                luminaapp.official@gmail.com
               </a>
               
               <p className="text-xl text-black-100 font-rubik-medium mb-6">
@@ -335,7 +335,7 @@ function Home() {
               </p>
               <div className="flex justify-center gap-8">
                 <a 
-                  href="https://instagram.com/lumminapp" 
+                  href="https://instagram.com/luminaapp" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-black-100 hover:text-primary-300 transition-colors"
@@ -345,7 +345,7 @@ function Home() {
                   </svg>
                 </a>
                 <a 
-                  href="https://twitter.com/lumminapp" 
+                  href="https://twitter.com/luminaapp" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-black-100 hover:text-primary-300 transition-colors"
@@ -355,7 +355,7 @@ function Home() {
                   </svg>
                 </a>
                 <a 
-                  href="https://discord.gg/lumminapp" 
+                  href="https://discord.gg/luminaapp" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-black-100 hover:text-primary-300 transition-colors"
